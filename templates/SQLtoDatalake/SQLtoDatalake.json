@@ -1,0 +1,247 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory Name"
+		},
+		"AzureSqlDatabase1": {
+			"type": "string"
+		},
+		"AzureDataLakeStore1": {
+			"type": "string"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLtoDatalake')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "transfer data from azure sql DB to datalake",
+				"activities": [
+					{
+						"name": "sqltodatalake",
+						"type": "Copy",
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"typeProperties": {
+							"source": {
+								"type": "SqlSource"
+							},
+							"sink": {
+								"type": "AzureDataLakeStoreSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"columnMappings": {
+									"fir_name": "column1",
+									"category": "column2",
+									"city": "column3",
+									"state": "column4",
+									"country": "column5",
+									"phone": "column6",
+									"ps_asset": "column7",
+									"ef_asset": "column8",
+									"pen_asst": "column9",
+									"oth_asst": "column10",
+									"dc_asset": "column11",
+									"db_asset": "column12",
+									"ast_allo_chg": "column13",
+									"invst_type": "column14",
+									"interest": "column15",
+									"pid": "column16"
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "AzureSqlTable1",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureDataLakeStoreFile3",
+								"type": "DatasetReference"
+							}
+						]
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/AzureSqlTable1')]",
+				"[concat(variables('factoryId'), '/datasets/AzureDataLakeStoreFile3')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('AzureSqlDatabase1')]",
+					"type": "LinkedServiceReference"
+				},
+				"type": "AzureSqlTable",
+				"structure": [
+					{
+						"name": "fir_name",
+						"type": "String"
+					},
+					{
+						"name": "category",
+						"type": "String"
+					},
+					{
+						"name": "city",
+						"type": "String"
+					},
+					{
+						"name": "state",
+						"type": "String"
+					},
+					{
+						"name": "country",
+						"type": "String"
+					},
+					{
+						"name": "phone",
+						"type": "String"
+					},
+					{
+						"name": "ps_asset",
+						"type": "String"
+					},
+					{
+						"name": "ef_asset",
+						"type": "String"
+					},
+					{
+						"name": "pen_asst",
+						"type": "String"
+					},
+					{
+						"name": "oth_asst",
+						"type": "String"
+					},
+					{
+						"name": "dc_asset",
+						"type": "String"
+					},
+					{
+						"name": "db_asset",
+						"type": "String"
+					},
+					{
+						"name": "ast_allo_chg",
+						"type": "String"
+					},
+					{
+						"name": "invst_type",
+						"type": "String"
+					},
+					{
+						"name": "interest",
+						"type": "String"
+					},
+					{
+						"name": "pid",
+						"type": "String"
+					}
+				],
+				"typeProperties": {
+					"tableName": "[concat('[', 'dbo].[source_data]')]"
+				}
+			}
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStoreFile3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('AzureDataLakeStore1')]",
+					"type": "LinkedServiceReference"
+				},
+				"type": "AzureDataLakeStoreFile",
+				"structure": [
+					{
+						"name": "column1",
+						"type": "String"
+					},
+					{
+						"name": "column2"
+					},
+					{
+						"name": "column3"
+					},
+					{
+						"name": "column4"
+					},
+					{
+						"name": "column5"
+					},
+					{
+						"name": "column6"
+					},
+					{
+						"name": "column7"
+					},
+					{
+						"name": "column8"
+					},
+					{
+						"name": "column9"
+					},
+					{
+						"name": "column10"
+					},
+					{
+						"name": "column11"
+					},
+					{
+						"name": "column12"
+					},
+					{
+						"name": "column13"
+					},
+					{
+						"name": "column14"
+					},
+					{
+						"name": "column15"
+					},
+					{
+						"name": "column16"
+					}
+				],
+				"typeProperties": {
+					"format": {
+						"type": "TextFormat",
+						"columnDelimiter": ",",
+						"rowDelimiter": "\n",
+						"quoteChar": "\"",
+						"nullValue": "\\N",
+						"encodingName": null,
+						"treatEmptyAsNull": true,
+						"skipLineCount": 0,
+						"firstRowAsHeader": true
+					},
+					"fileName": "",
+					"folderPath": ""
+				}
+			}
+		}
+	]
+}
