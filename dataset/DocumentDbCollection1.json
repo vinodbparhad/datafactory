@@ -1,0 +1,104 @@
+{
+	"name": "DocumentDbCollection1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "CosmosDb1",
+			"type": "LinkedServiceReference"
+		},
+		"type": "DocumentDbCollection",
+		"structure": [
+			{
+				"name": "id",
+				"type": "String"
+			},
+			{
+				"name": "_rid",
+				"type": "String"
+			},
+			{
+				"name": "_self",
+				"type": "String"
+			},
+			{
+				"name": "_etag",
+				"type": "String"
+			},
+			{
+				"name": "firm_name",
+				"type": "String"
+			},
+			{
+				"name": "Category",
+				"type": "String"
+			},
+			{
+				"name": "City",
+				"type": "String"
+			},
+			{
+				"name": "State",
+				"type": "Object"
+			},
+			{
+				"name": "Country",
+				"type": "Object"
+			},
+			{
+				"name": "Phone#",
+				"type": "Object"
+			},
+			{
+				"name": "Total PS Assets",
+				"type": "Object"
+			},
+			{
+				"name": "Total E/F Assets",
+				"type": "Object"
+			},
+			{
+				"name": "Pension Assets",
+				"type": "Object"
+			},
+			{
+				"name": "Other Assets",
+				"type": "Object"
+			},
+			{
+				"name": "Total DC Assets",
+				"type": "Object"
+			},
+			{
+				"name": "Total DB Assets",
+				"type": "Object"
+			},
+			{
+				"name": "Asset Allocation Changes",
+				"type": "Object"
+			},
+			{
+				"name": "Investment types for new mgrs",
+				"type": "Object"
+			},
+			{
+				"name": "Areas of future Investment Interest",
+				"type": "Object"
+			},
+			{
+				"name": "Pid#",
+				"type": "Object"
+			},
+			{
+				"name": "_attachments",
+				"type": "String"
+			},
+			{
+				"name": "_ts",
+				"type": "Int64"
+			}
+		],
+		"typeProperties": {
+			"collectionName": "data_output"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

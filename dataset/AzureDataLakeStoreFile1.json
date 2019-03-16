@@ -1,0 +1,92 @@
+{
+	"name": "AzureDataLakeStoreFile1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStore1",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureDataLakeStoreFile",
+		"structure": [
+			{
+				"name": "firm_name",
+				"type": "String"
+			},
+			{
+				"name": "Category",
+				"type": "String"
+			},
+			{
+				"name": "City",
+				"type": "String"
+			},
+			{
+				"name": "State",
+				"type": "String"
+			},
+			{
+				"name": "Country",
+				"type": "String"
+			},
+			{
+				"name": "Phone#",
+				"type": "String"
+			},
+			{
+				"name": "Total PS Assets",
+				"type": "String"
+			},
+			{
+				"name": "Total E/F Assets",
+				"type": "String"
+			},
+			{
+				"name": "Pension Assets",
+				"type": "String"
+			},
+			{
+				"name": "Other Assets",
+				"type": "String"
+			},
+			{
+				"name": "Total DC Assets",
+				"type": "String"
+			},
+			{
+				"name": "Total DB Assets",
+				"type": "String"
+			},
+			{
+				"name": "Asset Allocation Changes",
+				"type": "String"
+			},
+			{
+				"name": "Investment types for new mgrs",
+				"type": "String"
+			},
+			{
+				"name": "Areas of future Investment Interest",
+				"type": "String"
+			},
+			{
+				"name": "Pid#",
+				"type": "String"
+			}
+		],
+		"typeProperties": {
+			"format": {
+				"type": "TextFormat",
+				"columnDelimiter": ",",
+				"rowDelimiter": "\n",
+				"quoteChar": "\"",
+				"nullValue": "\\N",
+				"encodingName": null,
+				"treatEmptyAsNull": true,
+				"skipLineCount": 0,
+				"firstRowAsHeader": true
+			},
+			"fileName": "part-00000-tid-313774142886654486-5a0b7fdc-0463-4e7e-8113-86fa442a66e7-122-c000.csv",
+			"folderPath": "output_data.csv"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
